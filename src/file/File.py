@@ -32,10 +32,30 @@ class File:
     def exist(self, element):
         return element in self.elements
 
+    def __is_extension(self, s: str):
+        extension = [
+            ".png",
+            ".js",  
+            ".css",
+            ".jpg",
+            ".jpeg",
+            ".ico",
+            ".png",
+            ".svg"
+        ]
+        for e in extension:
+            if s.find(e) != -1:
+                return True
+        return False
+
     def save(self):
         self.__open_file('w')
         for element in self.elements:
-            self.file.write(element + "\n")
+            if element != "" and not self.__is_extension(element):
+                try:
+                    self.file.write(element + "\n")
+                except:
+                    pass
         self.___close_file()
         self.__load()
 
